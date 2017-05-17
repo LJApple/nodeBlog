@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LJApple/nodeBlog.git"
+  },
+  "author": "lvjun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LJApple/nodeBlog/issues"
+  },
+  "homepage": "https://github.com/LJApple/nodeBlog#readme",
+  "devDependencies": {
+    "express": "^4.15.2"
+  }
+}
