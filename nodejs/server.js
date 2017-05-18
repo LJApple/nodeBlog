@@ -20,7 +20,7 @@ server.use(multerObj.any());
 server.use(cookieParser());
 (function (){
   var keys=[];
-  for(var i=0;i<100000;i++){
+  for( i=0;i<100000;i++){
     keys[i]='a_'+Math.random();
   }
   server.use(cookieSession({
@@ -36,9 +36,24 @@ server.set('views', 'template');
 server.set('view engine', 'html');
 
 //4.route
-server.use('/article/', require('./route/1.js')());
-server.use('/blog/', require('./route/2.js')());
+var r1 = express.Router();
+var r2 = express.Router();
 
+server.use('/article/',r1);
 
+server.use('/1.html',function(req,res){
+	res.send('我是文章').end();
+});
+server.use('/2.html',function(req,res){
+	res.send('我是文章2').end();
+});
+server.use('/blog/',r2);
+
+server.use('/a.html',function(req,res){
+	res.send('我是blog').end();
+});
+server.use('/b.html',function(req,res){
+	res.send('我是blog').end();
+});
 //5.default：static
 server.use(static('./static/'));
