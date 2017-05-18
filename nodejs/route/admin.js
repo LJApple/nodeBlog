@@ -30,6 +30,7 @@ module.exports = function(){
 				if(data.length == 0){
 					res.status(400).send('no this addmin').end();
 				} else {
+					console.log(password);
 					if(data[0].password == password){
 						// 成功
 						req.session['admin_id'] = data[0].ID;
@@ -46,13 +47,29 @@ module.exports = function(){
 		res.render('admin/index.ejs');
 	});
 	router.get('/banners',(req,res)=>{
-		res.render('admin/banners.ejs',{});
+		db.query(`select * from banner_table`,(err,data)=>{
+			if(err){
+				res.staus(500).send('database error').end();
+			} else {
+				res.render('admin/banners.ejs',{data:data});
+			}
+		});
 	});
 	router.post('/banners',(req,res)=>{
 		var title = req.body.banner_title;
 		var desc = req.body.banner_desc;
 		var src = req.body.banner_src;
-		console.log(title,desc,src)
+		if (!title || !desc || !src) {
+			res.status(400).send('arg error').end();
+		} else {
+			db.query(`insert  into banner_table (title,description,href) value('${title}','${desc}','${src}')`,(err,data)=>{
+			if(err){
+				res.status(500).send('database error').end();
+			} else {
+				res.redirect('/admin/banners');
+			}
+		});
+		}
 	});
 	return router;
 };
