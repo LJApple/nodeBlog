@@ -12,17 +12,17 @@
       	<form action="/admin/banners" method="post">
       			<div class="form-group">
 								<label for="">标题</label>
-								<input type="text" class="form-control width50" name="banner_title"  placeholder="请输入标题" />
+								<input type="text" class="form-control width50" id="banner_title" name="banner_title"  placeholder="请输入标题" />
 					</div>
 						<div class="form-group">
 								<label for="">描述</label>
-								<textarea type="text" class="form-control width50" name="banner_desc"  placeholder="请输入标题"></textarea>
+								<textarea type="text" class="form-control width50" id="banner_desc"  name="banner_desc"  placeholder="请输入标题"></textarea>
 					</div>
 						<div class="form-group">
 								<label for="">链接</label>
-								<input type="text" class="form-control width50" name="banner_src"  placeholder="请输入标题" />
-					</div>
-					<button class="btn btn-primary" type="submit">提交</button>
+								<input type="text" class="form-control width50" id="banner_src" name="banner_src"  placeholder="请输入标题" />
+					</div> 
+					<button class="btn btn-primary" type="submit" id="submit">提交</button>
       	</form>
         <table class="table table-bordered mariginTP10">
             <thead>
@@ -46,6 +46,20 @@
                 <% } %>
             </tbody>
         </table>
-      </div>
+      <script type="text/javascript" src="../../static/js/jquery.js"></script>
+      <script>
+      jQuery(function ($) {
+        var titleVal = $("#banner_title").val();
+        var descVal = $("#banner_desc").val();
+        var srcVal = $("#banner_src").val();
+        // body...
+        $("#submit").on('click',function(){
+          if(titleVal == "" || descVal == "" || srcVal == ""){
+              $("#alertMsg").alert('数据不能为空');
+              return；
+          }
+        });
+      });
+      </script>
   </body>
 </html>
