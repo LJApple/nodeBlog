@@ -1,5 +1,5 @@
 const express=require('express');
-const static=require('express-static');
+//const expressStatic=require('express-static');
 const bodyParser=require('body-parser');
 const multer=require('multer');
 const multerObj=multer({dest: './static/upload'});
@@ -14,8 +14,8 @@ server.listen(8080);
 
 //1.获取请求数据
 //get自带
+server.use(bodyParser.urlencoded());
 server.use(multerObj.any());
-
 //2.cookie、session
 server.use(cookieParser());
 (function (){
@@ -24,7 +24,7 @@ server.use(cookieParser());
     keys[i]='a_'+Math.random();
   }
   server.use(cookieSession({
-    name: 'sess_id',
+    name: 'admin_id',
     keys: keys,
     maxAge: 20*60*1000  //20min
   }));
@@ -36,24 +36,10 @@ server.set('views', 'template');
 server.set('view engine', 'html');
 
 //4.route
-var r1 = express.Router();
-var r2 = express.Router();
+server.use('/', require('./route/web.js')());
 
-server.use('/article/',r1);
-
-server.use('/1.html',function(req,res){
-	res.send('我是文章').end();
-});
-server.use('/2.html',function(req,res){
-	res.send('我是文章2').end();
-});
-server.use('/blog/',r2);
-
-server.use('/a.html',function(req,res){
-	res.send('我是blog').end();
-});
-server.use('/b.html',function(req,res){
-	res.send('我是blog').end();
-});
+server.use('/admin', require('./route/admin.js')());
 //5.default：static
-server.use(static('./static/'));
+//server.use('/static', express.static(__dirname + '/public'));
+//server.use(expressStatic(__dirname + '/public'));
+server.use('/static', express.static(__dirname + '/public'));
