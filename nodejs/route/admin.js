@@ -30,7 +30,6 @@ module.exports = function(){
 				if(data.length == 0){
 					res.status(400).send('no this addmin').end();
 				} else {
-					console.log(data[0].password+':'+password)
 					if(data[0].password == password){
 						// 成功
 						req.session['admin_id'] = data[0].ID;
@@ -48,6 +47,12 @@ module.exports = function(){
 	});
 	router.get('/banners',(req,res)=>{
 		res.render('admin/banners.ejs',{});
+	});
+	router.post('/banners',(req,res)=>{
+		var title = req.body.banner_title;
+		var desc = req.body.banner_desc;
+		var src = req.body.banner_src;
+		console.log(title,desc,src)
 	});
 	return router;
 };
