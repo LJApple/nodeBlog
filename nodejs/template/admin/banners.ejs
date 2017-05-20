@@ -41,12 +41,46 @@
                     <td><%= data[i].title %></td>
                     <td><%= data[i].description %></td>
                     <td><%= data[i].href %></td>
-                    <td>删除，修改</td>
+                    <td style="width: 100px;"><a onclick="del(this)">删除</a><a onclick="updateData(this)">修改</a></td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
+      </div>
+       <div class="modal fade" id="updateData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog  modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    </button>
+                    <h4 class="modal-title">修改数据</h4>
+                </div>
+                <div class="modal-body clearfix">
+                   	<form action="/admin/banners" method="post">
+					      			<div class="form-group dipalyTable col-xs-12">
+													<label for="">标题</label>
+													<input type="text" class="form-control" id="banner_title" name="banner_title"  placeholder="请输入标题" />
+										</div>
+											<div class="form-group dipalyTable col-xs-12">
+													<label for="">描述</label>
+													<textarea type="text" class="form-control" id="banner_desc"  name="banner_desc"  placeholder="请输入标题"></textarea>
+										</div>
+											<div class="form-group dipalyTable col-xs-12">
+													<label for="">链接</label>
+													<input type="text" class="form-control" id="banner_src" name="banner_src"  placeholder="请输入标题" />
+										</div> 
+					      	</form>
+                </div>
+                <div class="modal-footer">
+                	 <button type="submit"  class="btn btn-default" data-dismiss="modal" word="Close">确定</button>
+                    <!--<button type="button"  class="btn btn-default" data-dismiss="modal" word="Close">关闭</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
       <script type="text/javascript" src="../../static/js/jquery.js"></script>
+      <script type="text/javascript" src="../../../static/js/bootstrap.min.js" ></script>
       <script>
       jQuery(function ($) {
         var titleVal = $("#banner_title").val();
@@ -56,10 +90,12 @@
         $("#submit").on('click',function(){
           if(titleVal == "" || descVal == "" || srcVal == ""){
               $("#alertMsg").alert('数据不能为空');
-              return；
           }
         });
       });
+      function updateData(obj) {
+        	 $("#updateData").modal('show');
+       }
       </script>
   </body>
 </html>

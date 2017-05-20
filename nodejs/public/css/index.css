@@ -44,6 +44,9 @@ html,body{
 	height: 100%;
 	width: 100%;
 }
+a{
+	cursor: pointer;
+}
 .left-warp li{
 	padding: 20px 0;
 	background-color: #dfdfdf;
@@ -59,4 +62,7 @@ html,body{
 }
 .mariginTP10{
 	margin-top: 10px;
+}
+.dipalyTable{
+	display: table;
 }
